@@ -16,4 +16,5 @@
     <string name="hint_color">Enter Color</string>
     <string name="hint_size">Enter Size</string>
     <string name="save_button">Save</string>
+    <string name="db_drop">DROP TABLE IF EXIST</string>
 </resources>

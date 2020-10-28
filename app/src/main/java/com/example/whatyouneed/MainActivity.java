@@ -34,6 +34,19 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        saveButton.findViewById(R.id.saveButton);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                saveItem();
+
+            }
+        });
+
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void saveItem() {
+
+        //save each item to database
+        //go to next screen - close popup
     }
 
     private void createPopupDialog() {
