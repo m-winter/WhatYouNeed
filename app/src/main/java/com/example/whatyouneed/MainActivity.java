@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Handler;
 import android.view.View;
 
 import android.view.Menu;
@@ -76,6 +77,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         //go to next screen - close popup
+
+        new Handler().postDelayed(new Runnable() {// delayed dismiss
+            @Override
+            public void run() {
+                dialog.dismiss();
+
+                startActivity(new Intent(MainActivity.this, ListActivity.class));
+
+            }
+        }, 1200);
 
 
     }

@@ -88,6 +88,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.query(Util.TABLE_NAME,
                 new String[]{Util.KEY_ID,
                         Util.KEY_NAME,
+                        Util.KEY_COLOR,
                         Util.KEY_QUANTITY,
                         Util.KEY_SIZE,
                         Util.KEY_DATE},
@@ -96,7 +97,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         String.valueOf(id)}, null, null, null, null
 
                         );
-        if (cursor == null) {
+        if (cursor != null) {
             cursor.moveToFirst();
         }
 
@@ -128,6 +129,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.query(Util.TABLE_NAME,
                 new String[]{Util.KEY_ID,
                         Util.KEY_NAME,
+                        Util.KEY_COLOR,
                         Util.KEY_QUANTITY,
                         Util.KEY_SIZE,
                         Util.KEY_DATE},
