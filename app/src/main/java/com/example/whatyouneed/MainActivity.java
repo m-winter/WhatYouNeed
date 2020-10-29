@@ -1,8 +1,11 @@
 package com.example.whatyouneed;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.whatyouneed.data.DatabaseHandler;
+import com.example.whatyouneed.model.Item;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText itemQuantity;
     private EditText itemColor;
     private EditText itemSize;
+    private DatabaseHandler databaseHandler;
 
 
     @Override
@@ -33,17 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        databaseHandler = new DatabaseHandler(this);
 
-        saveButton.findViewById(R.id.saveButton);
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                saveItem();
-
-            }
-        });
 
 
 
@@ -58,10 +53,31 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void saveItem() {
+    private void saveItem(View view) {
 
         //save each item to database
+        Item item = new Item();
+
+        String newItem = enterItem.getText().toString().trim();
+        String newColor = itemColor.getText().toString().trim();
+        int quantity = Integer.parseInt(itemQuantity.getText().toString().trim());
+        int size = Integer.parseInt(itemSize.getText().toString().trim());
+
+
+        item.setItemName(newItem);
+        item.setItemColor(newColor);
+        item.setItemQuantity(quantity);
+        item.setItemSize(size);
+
+
+        databaseHandler.addItem(item);
+
+        Snackbar.make(view, "Item Saved", Snackbar.LENGTH_SHORT).show();
+
+
         //go to next screen - close popup
+
+
     }
 
     private void createPopupDialog() {
@@ -73,6 +89,33 @@ public class MainActivity extends AppCompatActivity {
         itemColor = view.findViewById(R.id.itemColor);
         itemQuantity = view.findViewById(R.id.itemQuantity);
         itemSize = view.findViewById(R.id.itemSize);
+
+        saveButton = view.findViewById(R.id.saveButton);
+
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!enterItem.getText().toString().isEmpty()
+                        && ! itemColor.getText().toString().isEmpty()
+                        && ! itemQuantity.getText().toString().isEmpty()
+                        && ! itemSize.getText().toString().isEmpty())
+                {
+
+                    saveItem(v);
+                    Snackbar.make(v, "Item saved", Snackbar.LENGTH_SHORT).show();
+                }
+
+                else{
+                    Snackbar.make(v, "Empty item", Snackbar.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+
 
         builder.setView(view);
         dialog = builder.create(); //create dialog object
