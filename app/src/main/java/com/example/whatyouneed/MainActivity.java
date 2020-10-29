@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         databaseHandler = new DatabaseHandler(this);
 
+        byPassActivity();
+
+
 
 
 
@@ -52,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void byPassActivity() {
+
+        if (databaseHandler.getItemsCount() > 0){
+
+            startActivity(new Intent(MainActivity.this, ListActivity.class));
+            finish();
+        }
     }
 
     private void saveItem(View view) {

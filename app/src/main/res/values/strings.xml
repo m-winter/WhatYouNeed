@@ -17,4 +17,9 @@
     <string name="hint_size">Enter Size</string>
     <string name="save_button">Save</string>
     <string name="db_drop">DROP TABLE IF EXIST</string>
+    <string name="sure_text">Are you sure?</string>
+    <string name="no_text">NO</string>
+    <string name="yes_text">YES</string>
+    <string name="edit_text">Edit item</string>
+    <string name="update_text">Update</string>
 </resources>
